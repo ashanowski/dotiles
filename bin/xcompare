@@ -1,0 +1,17 @@
+#!/bin/sh
+# compare void linux packages
+pd=''; ps=''; pl=''
+
+for i in $@; do xbps-query -R $i >/dev/null || { echo wrong package name $i; exit 1; }; done
+
+for i in $@; do
+	pd="$pd $(xbps-query --fulldeptree -Rx $i | wc -l)"
+	ps="$ps $(xbps-query -R $i | grep installed_size | awk '{print $2}')"
+	pl="$pl $(xbps-query -R $i | grep license | awk '{print $2}')"
+done
+
+echo ''
+echo "dependencies: $pd
+installed_size: $ps 
+license: $pl" | column -t -N properties$(for s in $@; do a="$a,$s"; done; echo $a)
+ 

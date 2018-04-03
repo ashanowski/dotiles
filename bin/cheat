@@ -1,0 +1,27 @@
+#!/bin/sh
+# commandline cheat sheet
+
+usage() {
+cat <<EOF
+cheat - commandline cheat sheet
+
+usage: 
+      [command]
+	get a cheat sheet about command
+      [~keyword]
+	find cheat sheets by keyword
+      [list]
+	list cheat sheets
+      [*]/i
+	i   case insensitive search
+	b   word boundaries
+	r   recursive search
+EOF
+}
+
+if [ "$#" = 0 ];then
+	usage
+	exit
+fi
+
+curl cheat.sh/"$1"

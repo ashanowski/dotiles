@@ -1,0 +1,13 @@
+#!/bin/sh
+
+    
+case "$(printf "Lock\n_______\nShutdown\nRestart" | dmenu \
+     -i -p \
+    "Power:" -l 5)" in
+        Shutdown) sudo shutdown -P now;;
+	_______)  dmenu-power;;
+        Restart) sudo reboot;;
+        #Logout) to zaleznie od wm chyba;;
+        #Suspend) nie uzywam;;
+        Lock) lock;;
+esac

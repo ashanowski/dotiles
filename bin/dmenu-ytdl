@@ -1,0 +1,11 @@
+#!/bin/sh
+
+player='mpv --loop=inf --force-window=immediate'
+ytdl_command="youtube-dl"
+url="$(xclip -o)"
+
+for q in $($ytdl_command -F $url | tail -n +8 | dmenu -p Quality: | awk '{print $1}'); do
+	#$player "$($ytdl_command -f $q -g $url)";
+	#youtube-dl works with mpv ootb
+	$player --ytdl-format="$q" "$url";
+done

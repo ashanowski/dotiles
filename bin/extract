@@ -1,0 +1,77 @@
+#!/bin/sh
+# extract archive
+firstDir="$(pwd)"
+dup='(1)'
+
+createDir() {
+	if [ -d "$1" ]; then
+		dirName="$dirName$dup"
+		createDir "$dirName"
+	else
+		mkdir -p "$1" || { printf "%s\n" "cannot create directory"; exit 1; }
+	fi
+}
+
+for i in "$@"; do
+	if [ -f "$i" ]; then
+		file="$(readlink -f "$i")"
+		fileName="$(basename "$file")"
+
+		unpack() {
+			[ ! -x "$(command -v $1)" ] && { printf "%s\n" "install $1 to extract $fileName"; exit 1; } 
+			createDir "$dirName"
+
+			cd "$dirName"
+			$@ "$file" || rm -ri "$firstDir/$dirName"
+			cd "$firstDir"
+		}
+		
+		case "$fileName" in
+			*.[Zz][Ii][Pp])
+				dirName="${fileName%.*}"
+				unpack unzip
+				;;
+			*.[Rr][Aa][Rr])
+				dirName="${fileName%.*}"
+				unpack unrar x
+				;;
+			*.[Tt][Bb][Zz]2)
+				dirName="${fileName%.*}"
+				unpack tar xjvf
+				;;
+			*.[Tt][Aa][Rr].[Bb][Zz]2)
+				dirName="${fileName%.*.*}"
+				unpack tar xjvf
+				;;
+			*.[Tt][Gg][Zz])
+				dirName="${fileName%.*}"
+				unpack tar xjvf
+				;;
+			*.[Tt][Aa][Rr].[Gg][Zz])
+				dirName="${fileName%.*.*}"
+				unpack tar xzvf
+				;;
+			*.[Gg][Zz])
+				dirName="${fileName%.*}"
+				unpack gzip -d
+				;;
+			*.[Bb][Zz][Ii][Pp]2|*.[Bb][Zz]2)
+				dirName="${fileName%.*}"
+				unpack bzip2 -d
+				;;
+			*.[Xx][Zz])
+				dirName="${fileName%.*}"
+				unpack tar xf
+				;;
+			*.7[Zz]|*.[Aa][Rr][Jj]|*.[Cc][Aa][Bb]|*.[Cc][Hh][Mm]|*.[Dd][Ee][Bb]|*.[Dd][Mm][Gg]|*.[Ii][Ss][Oo]|*.[Ll][Zz][Hh]|*.[Mm][Ss][Ii]|*.[Rr][Pp][Mm]|*.[Uu][Dd][Ff]|*.[Ww][Ii][Mm]|*.[Xx][Aa][Rr])
+				dirName="${fileName%.*}"
+				unpack 7z x
+				;;
+			*)
+				printf "$s\n" 'error: unknown archive' >&2
+				;;
+		esac
+	else
+		printf "%s\n" "$i is not a file"
+	fi
+done

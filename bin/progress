@@ -1,0 +1,48 @@
+#!/bin/sh
+# creates process indicator
+
+dots() {
+for s in '.  ' '.. ' '...' ' ..' '  .' '   '; do 
+	printf "\r$text_before$s$text_after"; sleep .5
+done
+}
+
+lines() {
+for s in / - \\ \|; do
+    printf "\r$text_before$s$text_after"; sleep 0.1
+done
+}
+
+help() {
+cat <<EOF
+$0 usage:
+	-pid 
+		wait until given process dies
+	-t dots/lines
+		type of indicator
+	-b/a
+		text displayed before/after indicator
+EOF
+}
+
+while getopts "pid":"t":"b":"a":h o; do
+    case $o in
+	"h") help && exit 1;;
+	"pid") pid="$OPTARG";;
+	"t") [ "$OPTARG" = "dots" ] || [ "$OPTARG" = "lines" ] && type="$OPTARG" || { printf "%s\n" "wrong type"; exit 1; } ;; 
+	"b") text_before="$OPTARG";;
+ 	"a") text_after="$OPTARG";;
+   esac
+done
+
+if [ -z "$pid" ]; then
+    while true; do 
+        $type
+    done
+else
+    while kill -0 $pid 2>/dev/null; do
+        $type
+    done
+fi
+
+

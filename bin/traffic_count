@@ -1,0 +1,32 @@
+#!/bin/mksh
+
+#shows traffic on the specified device
+###CHECKS####
+
+DEVICE=$1
+IS_GOOD=0
+for GOOD_DEVICE in `grep ":" /proc/net/dev | awk '{print $1}' | sed s/://`; do
+	if [ $DEVICE = $GOOD_DEVICE ]; then
+		IS_GOOD=1
+		break
+	fi
+done
+if [ $IS_GOOD -eq 0 ]; then
+	printf "Device $DEVICE not found. Should be one of these:\n"
+	grep ":" /proc/net/dev | awk '{print $1}' | sed s/://
+	exit 1
+fi
+
+###REAL STUFF
+
+RECEIVED=`grep $1 /proc/net/dev | awk '{print $2}'`
+TRANSMITTED=`grep $1 /proc/net/dev | awk '{print $10}'`
+TOTAL=$(($RECEIVED+$TRANSMITTED))
+
+TRANSMITTED=$(printf $TRANSMITTED | b2hr)
+RECEIVED=$(printf $RECEIVED | b2hr)
+TOTAL=$(printf $TOTAL | b2hr)
+
+printf "Transmitted:$TRANSMITTED\n"
+printf "Received:$RECEIVED\n"
+#printf "Total:$TOTAL"

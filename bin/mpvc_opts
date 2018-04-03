@@ -1,0 +1,18 @@
+#!/bin/sh
+mpv_opts="--force-window=immediate --loop-file=inf"
+
+case "$(printf "Audio and video\nVideo only\nAudio only" \
+    | dmenu -p "Play:")" in
+    "Video only")
+      mpv $mpv_opts --aid=no "$(xclip -o)"
+      ;;
+    "Audio only")
+      mpv $mpv_opts --video=no "$(xclip -o)"
+      ;;
+    "Audio and video"|*)
+      mpv $mpv_opts "$(xclip -o)"
+      ;;
+esac
+
+#mpv "$(youtube-dl -f best -g "$(xclip -o)")" --force-window
+#mpv $mpv_opts $mpv_opts2 "$(xclip -o)"

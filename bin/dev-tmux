@@ -1,0 +1,18 @@
+#!/bin/sh 
+
+
+tmux new-session -d 'toxic'
+tmux split-window -h 
+$cmus
+tmux split-window -v cmus
+tmux -2 attach-session -d
+
+
+
+
+
+
+#tmux new-session -d 'vim'
+#tmux split-window -h 'toxic' 
+#tmux split-window -v 
+#tmux -2 attach-session -d 

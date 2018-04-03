@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+
+on="◼"
+off="◻"
+colornum=27
+colorinfo=237
+
+format() {
+    sed "
+        s/1/$on/g
+        s/0/$off/g
+        s/\s*/  /g
+        "
+}
+
+sigint() {
+    tput reset
+    break
+}
+trap sigint SIGINT
+
+sigwinch() {
+    tput clear
+    cols=$(tput cols)
+    lines=$(tput lines)
+    numcols=$(((cols-16)/2))
+    numlines=$(((lines-6)/2))
+}
+trap sigwinch SIGWINCH
+
+sigwinch
+tput civis
+
+while :; do
+    h=$(date +%H)
+    m=$(date +%M)
+    s=$(date +%S)
+    h_binary=$(printf 'obase=2;%d\n' "${h#0}" | bc)
+    m_binary=$(printf 'obase=2;%d\n' "${m#0}" | bc)
+    s_binary=$(printf 'obase=2;%d\n' "${s#0}" | bc)
+    tput cup $numlines $numcols
+    tput setaf $colorinfo
+    printf '%02d' "${h#0}"
+    tput setaf $colornum
+    printf '%06d' "${h_binary#0}" | format
+    tput cup $((numlines+2)) $numcols
+    tput setaf $colorinfo
+    printf '%02d' "${m#0}"
+    tput setaf $colornum
+    printf '%06d' "${m_binary#0}" | format
+    tput cup $((numlines+4)) $numcols
+    tput setaf $colorinfo
+    printf '%02d' "${s#0}"
+    tput setaf $colornum
+    printf '%06d' "${s_binary#0}" | format
+    tput cup $((numlines+6)) $numcols
+    tput setaf $colorinfo
+    printf '   32 16  8  4  2  1'
+    read -n 1 -t 1 && sigint
+done

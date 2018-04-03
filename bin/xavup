@@ -1,0 +1,17 @@
+#!/bin/sh 
+# check for updates
+while getopts "iyv" o; do
+	case "$o" in
+		i) update='sudo xi -Su';;
+		y) u_opt='-y';;
+		v) v=1;;
+		\?) exit 1;;
+	esac
+done
+
+n=$(xbps-install -Mun | grep -v hold | wc -l)
+
+[ ! -z "$v" ] && xbps-install -Mun | awk '{print $1, $2}' \
+|| echo $n
+
+[ ! -z "$update" ] && [ "$n" -gt 0 ] && $update $u_opt
