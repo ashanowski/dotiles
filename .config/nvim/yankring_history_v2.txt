@@ -1,0 +1,100 @@
+,V
+" better backup, swap and undos storageset directory=~/.vim/dirs/tmp     " directory to place swap files inset backup                        " make backup filesset backupdir=~/.vim/dirs/backups " where to put backup filesset undofile                      " persistent undos - undo after you re-open the fileset undodir=~/.vim/dirs/undosset viminfo+=n~/.vim/dirs/viminfo" store yankring history file there toolet g:yankring_history_dir = '~/.vim/dirs/'" create needed directories if they don't existif !isdirectory(&backupdir)    call mkdir(&backupdir, "p")endifif !isdirectory(&directory)    call mkdir(&directory, "p")endifif !isdirectory(&undodir)    call mkdir(&undodir, "p")endif,V
+#,v
+ ,v
+$,v
+},v
+{,v
+%,v
+*,v
+⌚,v
+## Main prompt#local host_name="%{$fg[cyan]%}"local path_string="%{$fg[yellow]%}%~"local prompt_string="»"# Make prompt_string red if the previous command failed.local return_status="%(?:%{$fg[blue]%}$prompt_string:%{$fg[red]%}$prompt_string)"PROMPT='${host_name} ${path_string} ${return_status} %{$reset_color%}'# oh-my-zsh $(git_prompt_info) puts 'dirty' behind branchgit_custom_prompt() {  # branch name (.oh-my-zsh/plugins/git/git.plugin.zsh)  local branch=$(current_branch)  if [ -n "$branch" ]; then    # parse_git_dirty echoes PROMPT_DIRTY or PROMPT_CLEAN (.oh-my-zsh/lib/git.zsh)    echo "$(parse_git_dirty)$ZSH_THEME_GIT_PROMPT_PREFIX$branch$ZSH_THEME_GIT_PROMPT_SUFFIX"  fi},V
+%{$fg_bold[green]%}${PWD/#$HOME/~}%{$reset_color%}$(git_prompt_info)  %{$fg_bold[red]%}',v
+%*%{$reset_color%}$ ',v
+reset_color,v
+%%{$,v
+",v
+false,v
+squar,v
+    info "Icons" icons,V
+    info "Theme" theme,V
+    info "WM Theme" wm_theme,V
+    info "GPU" gpu,V
+    info "CPU" cpu,V
+    info "Host" model,V
+print(polysum(52, 16)),V
+numpy,v
+from math import pi, tan,V
+def isIn(char, aStr):    '''   char: a single character   aStr: an alphabetized string   returns: True if char is in aStr; False otherwise    '''    if aStr == '':        return False    if len(aStr) == 1:        return aStr == char    midIndex = len(aStr)//2    midChar = aStr[midIndex]    if char == midChar:        return True    elif char < midChar:        return isIn(char, aStr[:midIndex])    else:        return isIn(char, aStr[midIndex+1:])print(isIn('z', 'zzeef')),V
+   #  so recursively search on the last half of aStr,V
+   # Otherwise the test character is larger than the middle character,,V
+   #  character, recursively search on the first half of aStr,V
+   # Recursive case: If the test character is smaller than the middle,V
+      # We found the character!,V
+   # Base case: if aStr is of length 1, just see if the chars are equal,V
+   # Base case: If aStr is empty, we did not find the char.,V
+   #   test character,V
+   # Base case: See if the character in the middle of aStr equals the,V
+def isIn(char, aStr):    """    char: a single character    aStr: an alphabetized string    returns: True if char is in aStr; False otherwise    """    def middle(_list):        if len(_list) % 2 != 0:            return _list[len(_list) // 2]        return _list[len(_list) // 2 - 1]    if not aStr or not char:        return False    if char == middle(aStr):        return True    try:        if char < middle(aStr):            # find char in fist half            return isIn(char, aStr[:aStr.index(middle(aStr))])        if char > middle(aStr):            # find char in second half            return isIn(char, aStr[aStr.index(middle(aStr)):])    except RecursionError:        return False,v
+aeegjkovy,v
+def isIn(char, aStr):    """    char: a single character    aStr: an alphabetized string    returns: True if char is in aStr; False otherwise    """    def middle(_list):        if len(_list) % 2 != 0:            return _list[len(_list) // 2]        else:            return _list[len(_list) // 2]    if not aStr or not char:        return False    if char == middle(aStr):        return True    try:        if char < middle(aStr):            return isIn(char, aStr[:aStr.index(middle(aStr))])        if char > middle(aStr):            return isIn(char, aStr[aStr.index(middle(aStr)):])    except RecursionError:        return False,V
+    if not aStr or not char:        return False,V
+def isIn(char, aStr):    """    char: a single character    aStr: an alphabetized string    returns: True if char is in aStr; False otherwise    """    def middle(_list):        if len(_list) % 2 != 0:            return _list[len(_list) // 2]        else:            return _list[len(_list) // 2]    if char == middle(aStr):        return True    try:        if char < middle(aStr):            return isIn(char, aStr[:aStr.index(middle(aStr))])        if char > middle(aStr):            return isIn(char, aStr[aStr.index(middle(aStr)):])    except RecursionError:        return False,V
+print(isIn(char, aStr)),V
+aStr = 'abcd',V
+char = 'z',V
+, _list[len(_list) + 1 // 2],v
+        return isIn(char, ),V
+print(middle([1, 2, 3, 4, 5, 6])),V
+        return _list[len(_list)//2 - 1], _list[len(_list)//2],V
+    else:,V
+        return _list[len(_list)//2],V
+    if len(_list) % 2 != 0:,V
+def middle(_list):,V
+    def middle(_list):        if len(_list) % 2 != 0:            return _list[len(_list)//2]        else:            return _list[len(_list)], _list[len(_list) + 1],V
+        return True,V
+    if char == aStr[len(aStr)/2],V
+    # Your code here,V
+    ''',v
+def gcdRecur(a, b):    '''    a, b: positive integers    returns: a positive integer, the greatest common divisor of a & b.    '''    if b == 0:        return a    else:        return gcdRecur(b, a%b)print(gcdRecur(9, 12)),V
+def gcdRecur(a, b):    '''    a, b: positive integers    returns: a positive integer, the greatest common divisor of a & b.    '''    if b == 0:        return a    else:        return gcdRecur(b, a%b),V
+def gcdIter(a, b):    """    a, b: positive integers    returns: a positive integer, the greatest common divisor of a & b.    """    test = min(a, b)    found = False    while not(a%test == 0 and b%test == 0):        if test == 1:            break        test -= 1    return testprint(gcdIter(17, 12)),V
+def gcdIter(a, b):    """    a, b: positive integers    returns: a positive integer, the greatest common divisor of a & b.    """    test = min(a, b)    found = False    while not(a%test == 0 and b%test == 0):        if test == 1:            break        test -= 1    return test,V
+ 1,v
+ !=,v
+ test,v
+or,v
+            break,V
+        if test == 1:,V
+        if a%test == 0 and b%test == 0:,V
+a%test == 0 and b%test == 0:,v
+print('haha'),v
+gcdIter(1,2),V
+gcdIter(1, 2),V
+def recurPower(base, exp):    if exp == 0:        return 1    if exp == 1:        return base    else:        base = base * recurPower(base, exp-1)    return base,V
+print(recurPower(2,4)),V
+    num = base,V
+num,v
+def iterPower(base, exp):    num = base    if exp == 0:        return 1    if exp == 1:        return num    for _ in range(exp-1):        num = num*base    return num,V
+def iterPower(base, exp):    num = base    if exp == 0 or exp == 1:        return 1    for _ in range(exp-1):        num = num*base    return num,V
+print(iterPower(2, 4)),V
+ase = base * base,v
+print("Please think of a number between 0 and 100!")low = 0high = 100guess = (low + high)//2decisions = "hlc"guessed = Falsewhile guessed is not True:    guess = (low + high)//2    print('Is your secret number {}?'.format(guess))    d = input('Enter \'h\' to indicate the guess is too high. Enter \'l\' to indicate the guess is too low. Enter \'c\' to indicate I guessed correctly.')    while d not in decisions:        if d not in decisions:            print('Sorry, I did not understand your input.')            break        else:            break    if d == 'l':        low = guess    if d == 'h':        high = guess    if d == 'c':        guessed = Trueprint('Game over. Your secret number was:', guess),V
+print("Please think of a number between 0 and 100!")low = 0high = 99guess = ((low + high)/2)decisions = "hlc"while True:    print('Is your secret number {}?'.format(round(guess)))    d = input('Enter \'h\' to indicate the guess is too high. \nEnter \'l\' to indicate the guess is too low. \nEnter \'c\' to indicate I guessed correctly.')    while d not in decisions:        if d not in decisions:            d = input('Sorry, I did not understand your input.')        else:            break    if d == 'l':        low = guess    if d == 'h':        high = guess    if d == 'c':        print('Game over. Your secret number was:', guess)        break    guess = ((low+high)/2),V
+from math import ceil,V
+ceil,v
+from math import ceilprint("Please think of a number between 0 and 100!")low = 0high = 99guess = ((low + high)/2)decisions = "hlc"while True:    print('Is your secret number {}?'.format(ceil(guess)))    d = input('Enter \'h\' to indicate the guess is too high. \nEnter \'l\' to indicate the guess is too low. \nEnter \'c\' to indicate I guessed correctly.')    while d not in decisions:        if d not in decisions:            d = input('Sorry, I did not understand your input.')        else:            break    if d == 'l':        low = guess    if d == 'h':        high = guess    if d == 'c':        print('Game over. Your secret number was:', guess)        break    guess = ((low+high)/2),V
+from math import ceilprint("Please think of a number between 0 and 100!")low = 0high = 99guess = ceil((low + high)/2)decisions = "hlc"while True:    print('Is your secret number {}?'.format(guess))    d = input('Enter \'h\' to indicate the guess is too high. \nEnter \'l\' to indicate the guess is too low. \nEnter \'c\' to indicate I guessed correctly.')    while d not in decisions:        if d not in decisions:            d = input('Sorry, I did not understand your input.')        else:            break    if d == 'l':        low = guess    if d == 'h':        high = guess    if d == 'c':        print('Game over. Your secret number was:', guess)        break    guess = ceil((low+high)/2),V
+round,v
+print("Please think of a number between 0 and 100!")low = 0high = 100guess = round((low + high)/2)decisions = "hlc"while True:    print('Is your secret number {}?'.format(guess))    d = input('Enter \'h\' to indicate the guess is too high. \nEnter \'l\' to indicate the guess is too low. \nEnter \'c\' to indicate I guessed correctly.')    while d not in decisions:        if d not in decisions:            d = input('Sorry, I did not understand your input.')        else:            break    if d == 'l':        low = guess    if d == 'h':        high = guess    if d == 'c':        print('Game over. Your secret number was:', guess)        break    guess = round((low+high)/2),V
+ input,v
+ =,v
+number,v
+number = input("Please think of a number between 0 and 100! "),V
+number = input("Please think of a number between 0 and 100! ")low = 0high = 100guess = round((low + high)/2)decisions = "hlc"while True:    print('Is your secret number {}?'.format(guess))    d = input('Enter \'h\' to indicate the guess is too high. \nEnter \'l\' to indicate the guess is too low. \nEnter \'c\' to indicate I guessed correctly.')    while d not in decisions:        if d not in decisions:            d = input('Sorry, I did not understand your input.')        else:            break    if d == 'l':        low = guess    if d == 'h':        high = guess    if d == 'c':        print('Game over. Your secret number was:', guess)        break    guess = round((low+high)/2),V
+        d = input('Enter \'h\' to indicate the guess is too high. \nEnter \'l\' to indicate the guess is too low. \nEnter \'c\' to indicate I guessed correctly.'),V
+        print('So your number is higher?'),V
+        print('So your number is lower?'),V
+high,v
+),v
+answer,v

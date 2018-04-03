@@ -1,0 +1,104 @@
+! clean up urxvt, add keybinds
+URxvt.intensityStyles: false
+URxvt.scrollBar: false
+URxvt.keysym.Shift-Up: command:\033]720;1\007
+URxvt.keysym.Shift-Down: command:\033]721;1\007
+URxvt.resize-font.smaller: C-Down
+URxvt.resize-font.bigger: C-Up
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+
+! font
+!URxvt*font: xft:Source\ Code\ Pro\ Medium:size=10:antialias=true:hinting=true,xft:FontAwesome
+!URxvt.font: xft:SauceCodePro Nerd Font:style=Regular:size=10
+URxvt.font: xft:SauceCodePro Nerd Font for Powerline:size=10:style=Regular
+
+!URxvt.font: xft:Sauce:size=10
+
+URxvt.letterSpace: 1
+! terminal padding
+URxvt.internalBorder: 0
+
+! uncomment for transparent terminal if you are ready to be made fun of in #rice
+URxvt.transparent:	true
+URxvt.shading:	10
+
+! make otf / ttf fonts look pretty.  does not matter if you are using a bitmap font.
+Xft.autohint: 0
+Xft.lcdfilter:  lcddefault
+Xft.hintstyle:  hintfull
+Xft.hinting: 0
+ft.antialias: 1
+Xft.rgba: rgb
+
+! clickable links, clipboard support, mouse wheel support, and on the fly font resizing
+! you will need to install the relevent perl extensions for these to work
+URxvt.perl-ext-common: default,matcher,clipboard,vtwheel,resize-font
+URxvt.url-launcher: /usr/bin/firefox
+URxvt.matcher.button: 1
+URxvt.matcher.rend.0: Uline Bold fg5
+
+! Enable the extended coloring options
+rofi.color-enabled: true
+!                  bg       border   separator
+rofi.color-window: black,   #a89984, #a89984
+!                  bg       fg       bg-alt   hl-bg    hl-fg
+rofi.color-normal: #282C33, white,   #282C33,  #665c54, #fbf1c7
+rofi.color-active: #d79921, #282828, #d79921, #fabd2f, #282828
+rofi.color-urgent: #cc241d, #282828, #cc241d, #fb4934, #282828
+
+rofi.separator-style: solid
+rofi.sidebar-mode: true
+rofi.bw: 1
+rofi.columns: 1
+rofi.padding: 16
+
+rofi.yoffset: 0
+rofi.fake-transparency: false
+rofi.location: 0
+rofi.width: 50
+rofi.font: SauceCodePro Nerd Font for Powerline 10
+rofi.lines: 15
+rofi.fixed-num-lines: true
+
+! Shades
+#define black	#000000
+#define gray01	#282C33
+#define gray02	#383E47
+#define gray03	#586270
+#define gray04	#798494
+#define gray05	#BCC5D1
+#define gray06	#D8D8D8
+#define white	#FDFEFF
+
+! Colors
+#define red		#B27B78
+#define orange	#C48D62
+#define yellow	#D8C27A
+#define green	#99AE63
+#define cyan	#8DC9C3
+#define blue	#7495B6
+#define magenta	#B59CD8
+#define pink 	#CC99B3
+
+*.foreground:   gray06
+*.background:   black
+*.cursorColor:  gray06
+
+*.color0:       black
+*.color1:       orange
+*.color2:       green
+*.color3:       yellow
+*.color4:       blue
+*.color5:       magenta
+*.color6:       cyan
+*.color7:       gray05
+
+*.color8:       gray03
+*.color9:       red
+*.color10:      gray01
+*.color11:      gray02
+*.color12:      gray04
+*.color13:      gray06
+*.color14:      pink
+*.color15:      white

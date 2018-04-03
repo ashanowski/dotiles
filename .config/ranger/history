@@ -1,0 +1,50 @@
+search xinitrc
+search down
+shell mv Badanie_zaleznosci.xlsx data.xlsx
+shell extract iota-2.5.6.tar.gz
+open_with q`
+open_with xdg-open
+search kons
+shell extract kons.zip\(1\)
+shell mv kons.zip\(1\) kons.zip
+shell extract kons.zip
+shell firefox fred_18_01_17_11:11:29.html
+search kurwa
+shell chmod+x devmon-d devumount
+shell mkdir
+shell mkdir data
+shell mkdir exploration
+shell touch README.md
+shell mv /ho
+shell mv train.csv data.csv
+shell mv data.csv titanic.csv
+search 15
+search 
+search 151
+search python
+search zsh
+search hisotry
+search history
+search dmenu
+search download
+search webm
+shell nvim array.py
+shell node.py
+shell nvim node.py
+search scrot
+shell mv structure oesu
+shell unzip structures.zip
+search mkdir struktury
+shell mkdir struktury
+shell mv nvim nvim2
+search nvim
+search linke
+shell mv Sauce\ Code\ Pro\ Nerd\ Fontq
+shell 
+search fonts
+search usr
+delete
+search bin
+search focus
+shell t
+open_with 
